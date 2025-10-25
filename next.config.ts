@@ -2,15 +2,15 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: process.env.IS_OUTPUT_EXPORT ? "export" : "standalone",
-  basePath: "/admin-one-react-tailwind",
+  basePath: "",
   async redirects() {
     return [
-      {
-        source: "/",
-        destination: "/admin-one-react-tailwind",
-        basePath: false,
-        permanent: false,
-      },
+      // {
+      //   source: "/",
+      //   destination: "/",
+      //   basePath: false,
+      //   permanent: false,
+      // },
     ];
   },
   images: {
@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "static.justboil.me",
+        hostname: "static.engage.mojaone.co.tz",
       },
     ],
   },

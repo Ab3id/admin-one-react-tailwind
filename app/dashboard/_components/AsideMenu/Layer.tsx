@@ -4,7 +4,6 @@ import Icon from "../../../_components/Icon";
 import AsideMenuItem from "./Item";
 import AsideMenuList from "./List";
 import { MenuAsideItem } from "../../../_interfaces";
-import { useAppSelector } from "../../../_stores/hooks";
 
 type Props = {
   menu: MenuAsideItem[];
@@ -18,7 +17,6 @@ export default function AsideMenuLayer({
   className = "",
   ...props
 }: Props) {
-  const darkMode = useAppSelector((state) => state.darkMode.isEnabled);
 
   const logoutItem: MenuAsideItem = {
     label: "Logout",
@@ -34,34 +32,26 @@ export default function AsideMenuLayer({
 
   return (
     <aside
-      className={`${className} zzz lg:py-2 lg:pl-2 w-60 fixed flex z-40 top-0 h-screen transition-position overflow-hidden`}
+      className={`${className} lg:py-2 lg:pl-2 w-72 fixed flex z-40 top-0 h-screen transition-position overflow-hidden`}
     >
-      <div
-        className={`aside lg:rounded-2xl flex-1 flex flex-col overflow-hidden dark:bg-slate-900`}
-      >
-        <div
-          className={`aside-brand flex flex-row h-14 items-center justify-between dark:bg-slate-900`}
-        >
-          <div className="text-center flex-1 lg:text-left lg:pl-6 xl:text-center xl:pl-0">
-            <b className="font-black">One</b>
+      <div className="bg-black/50 backdrop-blur-md border-r border-white/10 lg:rounded-2xl flex-1 flex flex-col overflow-hidden">
+        <div className="flex flex-row h-16 items-center justify-between px-6">
+          <div className="text-center flex-1 lg:text-left xl:text-center xl:pl-0">
+            <b className="font-bold text-white text-lg">MojaSMS</b>
           </div>
           <button
-            className="hidden lg:inline-block xl:hidden p-3"
+            className="hidden lg:inline-block xl:hidden p-2 text-gray-400 hover:text-white transition-colors"
             onClick={handleAsideLgCloseClick}
           >
-            <Icon path={mdiClose} />
+            <Icon path={mdiClose} size="20" />
           </button>
         </div>
-        <div
-          className={`flex-1 overflow-y-auto overflow-x-hidden ${
-            darkMode ? "aside-scrollbars-[slate]" : "aside-scrollbars"
-          }`}
-        >
+        <div className="flex-1 overflow-y-auto overflow-x-hidden px-3">
           <AsideMenuList menu={menu} onRouteChange={props.onRouteChange} />
         </div>
-        <ul>
+        <div className="p-3 border-t border-white/10">
           <AsideMenuItem item={logoutItem} onRouteChange={props.onRouteChange} />
-        </ul>
+        </div>
       </div>
     </aside>
   );

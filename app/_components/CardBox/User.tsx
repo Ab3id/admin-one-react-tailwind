@@ -1,11 +1,11 @@
 "use client";
 
-import { mdiCheckDecagram } from "@mdi/js";
-import { Field, Form, Formik } from "formik";
+// import { mdiCheckDecagram } from "@mdi/js";
+// import { Field, Form, Formik } from "formik";
 import { useAppSelector } from "../../_stores/hooks";
 import CardBox from ".";
-import FormCheckRadio from "../FormField/CheckRadio";
-import PillTag from "../PillTag";
+// import FormCheckRadio from "../FormField/CheckRadio";
+// import PillTag from "../PillTag";
 import UserAvatarCurrentUser from "../../dashboard/_components/UserAvatar/CurrentUser";
 
 type Props = {
@@ -13,14 +13,18 @@ type Props = {
 };
 
 const CardBoxUser = ({ className }: Props) => {
-  const userName = useAppSelector((state) => state.main.userName);
+
+
+  
+    const userName = useAppSelector((state) =>{
+      return `${state.auth.user?.firstname} ${state.auth.user?.lastname}`});
 
   return (
     <CardBox className={className}>
       <div className="flex flex-col lg:flex-row items-center justify-around lg:justify-center">
         <UserAvatarCurrentUser className="mb-6 lg:mb-0 lg:mx-12" />
         <div className="space-y-3 text-center md:text-left lg:mx-12">
-          <div className="flex justify-center md:block">
+          {/* <div className="flex justify-center md:block">
             <Formik
               initialValues={{
                 notifications: ["1"],
@@ -33,16 +37,16 @@ const CardBoxUser = ({ className }: Props) => {
                 </FormCheckRadio>
               </Form>
             </Formik>
-          </div>
+          </div> */}
           <h1 className="text-2xl">
             Howdy, <b>{userName}</b>!
           </h1>
           <p>
             Last login <b>12 mins ago</b> from <b>127.0.0.1</b>
           </p>
-          <div className="flex justify-center md:block">
+          {/* <div className="flex justify-center md:block">
             <PillTag label="Verified" color="info" icon={mdiCheckDecagram} />
-          </div>
+          </div> */}
         </div>
       </div>
     </CardBox>

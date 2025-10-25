@@ -1,8 +1,8 @@
-import { mdiCog } from "@mdi/js";
+// import { mdiCog } from "@mdi/js";
 import React from "react";
 import { ColorKey, TrendType } from "../../_interfaces";
 import { colorsText } from "../../_lib/colors";
-import Button from "../Button";
+// import Button from "../Button";
 import Icon from "../Icon";
 import CardBox from ".";
 import NumberDynamic from "../NumberDynamic";
@@ -31,7 +31,7 @@ const CardBoxWidget = (props: Props) => {
             color={props.trendColor}
             small
           />
-          <Button icon={mdiCog} color="lightDark" small />
+          {/* <Button icon={mdiCog} color="lightDark" small /> */}
         </div>
       )}
       <div className="flex items-center justify-between">

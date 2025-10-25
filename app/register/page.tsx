@@ -1,14 +1,14 @@
 import React from "react";
 import { getPageTitle } from "../_lib/config";
 import { Metadata } from "next";
-import LoginForm from "./_components/LoginForm";
+import RegisterForm from "./_components/RegisterForm";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: getPageTitle("Login"),
+  title: getPageTitle("Register"),
 };
 
-const LoginPage = () => {
+const RegisterPage = () => {
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center p-8">
       {/* Grid Background */}
@@ -25,24 +25,24 @@ const LoginPage = () => {
       </div>
       
       {/* Main Content */}
-      <div className="relative z-10 w-full max-w-4xl mx-auto">
+      <div className="relative z-10 w-full max-w-5xl mx-auto">
         <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl overflow-hidden">
-          <div className="grid md:grid-cols-2 min-h-[600px]">
+          <div className="grid md:grid-cols-2 min-h-[700px]">
             {/* Left Side - Branding */}
-            <div className="bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-pink-600/20 flex items-center justify-center p-12">
+            <div className="bg-gradient-to-br from-purple-600/20 via-pink-600/20 to-blue-600/20 flex items-center justify-center p-12">
               <div className="text-center">
-                <h1 className="text-4xl font-bold mb-4">MojaSMS</h1>
-                <p className="text-gray-300 text-lg leading-relaxed">
-                  Tanzania&apos;s trusted SMS platform - connecting businesses nationwide
+                <h1 className="text-4xl font-bold mb-4">Join MojaSMS</h1>
+                <p className="text-gray-300 text-lg leading-relaxed mb-8">
+                  Start building the future of communication today
                 </p>
-                <div className="mt-8 flex justify-center items-center gap-8 text-gray-400 text-sm">
+                <div className="flex justify-center items-center gap-8 text-gray-400 text-sm">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                    Local support
+                    <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
+                    Free to start
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                    All networks
+                    <span className="w-2 h-2 bg-pink-500 rounded-full"></span>
+                    No setup fees
                   </div>
                 </div>
               </div>
@@ -52,16 +52,16 @@ const LoginPage = () => {
             <div className="flex items-center justify-center p-12">
               <div className="w-full max-w-sm">
                 <div className="text-center mb-8">
-                  <h2 className="text-2xl font-bold mb-2">Sign in</h2>
-                  <p className="text-gray-400">Access your SMS dashboard</p>
+                  <h2 className="text-2xl font-bold mb-2">Create account</h2>
+                  <p className="text-gray-400">Get started with MojaSMS</p>
                 </div>
                 
-                <LoginForm />
+                <RegisterForm />
                 
                 <div className="text-center text-sm text-gray-400 mt-6">
-                  Don&apos;t have an account?{' '}
-                  <Link href="/register" className="text-blue-400 hover:text-blue-300 font-medium transition-colors">
-                    Create one here
+                  Already have an account?{' '}
+                  <Link href="/login" className="text-purple-400 hover:text-purple-300 font-medium transition-colors">
+                    Sign in here
                   </Link>
                 </div>
               </div>
@@ -73,4 +73,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

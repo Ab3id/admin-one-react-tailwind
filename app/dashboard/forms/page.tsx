@@ -1,227 +1,207 @@
 "use client";
 
-import {
-  mdiAccount,
-  mdiBallotOutline,
-  mdiGithub,
-  mdiMail,
-  mdiUpload,
-} from "@mdi/js";
 import { Field, Form, Formik } from "formik";
 import Head from "next/head";
-import Button from "../../_components/Button";
-import Buttons from "../../_components/Buttons";
-import Divider from "../../_components/Divider";
-import CardBox from "../../_components/CardBox";
-import FormCheckRadio from "../../_components/FormField/CheckRadio";
-import FormCheckRadioGroup from "../../_components/FormField/CheckRadioGroup";
-import FormField from "../../_components/FormField";
-import FormFilePicker from "../../_components/FormField/FilePicker";
-import SectionMain from "../../_components/Section/Main";
-import SectionTitle from "../../_components/Section/Title";
-import SectionTitleLineWithButton from "../../_components/Section/TitleLineWithButton";
 import { getPageTitle } from "../../_lib/config";
-import FieldLabel from "../../_components/FormField/FieldLabel";
 
 export default function FormsPage() {
   return (
-    <>
+    <div className="p-6 max-w-7xl mx-auto">
       <Head>
         <title>{getPageTitle("Forms")}</title>
       </Head>
 
-      <SectionMain>
-        <SectionTitleLineWithButton
-          icon={mdiBallotOutline}
-          title="Formik forms example"
-          main
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-white mb-2">SMS Forms</h1>
+        <p className="text-gray-400">Configure your SMS campaigns for Tanzanian audiences</p>
+      </div>
+
+      <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 mb-8">
+        <h2 className="text-xl font-semibold text-white mb-6">Basic Form Example</h2>
+        
+        <Formik
+          initialValues={{
+            fullname: "",
+            email: "",
+            phone: "",
+            color: "green",
+            textarea: "",
+          }}
+          onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
         >
-          <Button
-            href="https://github.com/justboil/admin-one-react-tailwind"
-            target="_blank"
-            icon={mdiGithub}
-            label="Star on GitHub"
-            color="contrast"
-            roundedFull
-            small
-          />
-        </SectionTitleLineWithButton>
-
-        <CardBox>
-          <Formik
-            initialValues={{
-              fullname: "John Doe",
-              email: "john.doe@example.com",
-              phone: "",
-              color: "green",
-              textarea: "Hello",
-            }}
-            onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
-          >
-            <Form>
-              <div className="grid grid-cols-1 gap-3 md:grid-cols-2 mb-6 last:mb-0">
-                <div>
-                  <FormField label="Name" labelFor="fullname" icon={mdiAccount}>
-                    {({ className }) => (
-                      <Field
-                        name="fullname"
-                        id="fullname"
-                        placeholder="Full name"
-                        className={className}
-                      />
-                    )}
-                  </FormField>
-                </div>
-                <div>
-                  <FormField label="Email" labelFor="email" icon={mdiMail}>
-                    {({ className }) => (
-                      <Field
-                        type="email"
-                        name="email"
-                        id="email"
-                        placeholder="Email"
-                        className={className}
-                      />
-                    )}
-                  </FormField>
-                </div>
+          <Form className="space-y-6">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              <div>
+                <label htmlFor="fullname" className="block text-sm font-medium text-gray-300 mb-2">
+                  Full Name
+                </label>
+                <Field
+                  name="fullname"
+                  id="fullname"
+                  placeholder="Enter your full name"
+                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
+                />
               </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                  Email
+                </label>
+                <Field
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Enter your email"
+                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
+                />
+              </div>
+            </div>
 
-              <FormField
-                label="With help line and labelFor"
-                labelFor="phone"
-                help="Help line comes here"
+              <div>
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
+                  Phone Number
+                </label>
+                <Field
+                  name="phone"
+                  placeholder="+255 754 123 456"
+                  id="phone"
+                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
+                />
+                <p className="text-sm text-gray-500 mt-1">Use Tanzanian format: +255 followed by 9 digits.</p>
+              </div>            <div>
+              <label htmlFor="color" className="block text-sm font-medium text-gray-300 mb-2">
+                Favorite Color
+              </label>
+              <Field
+                name="color"
+                id="color"
+                component="select"
+                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
               >
-                {({ className }) => (
-                  <Field
-                    name="phone"
-                    placeholder="Phone"
-                    id="phone"
-                    className={className}
-                  />
-                )}
-              </FormField>
+                <option value="red">Red</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+              </Field>
+            </div>
 
-              <FormField label="Dropdown" labelFor="color">
-                {({ className }) => (
-                  <Field
-                    name="color"
-                    id="color"
-                    component="select"
-                    className={className}
-                  >
-                    <option value="red">Red</option>
-                    <option value="green">Green</option>
-                    <option value="blue">Blue</option>
-                  </Field>
-                )}
-              </FormField>
+            <div>
+              <label htmlFor="textarea" className="block text-sm font-medium text-gray-300 mb-2">
+                Message
+              </label>
+              <Field
+                name="textarea"
+                id="textarea"
+                as="textarea"
+                rows="4"
+                placeholder="Enter your message"
+                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all resize-none"
+              />
+            </div>
 
-              <Divider />
+            <div className="flex gap-4">
+              <button
+                type="submit"
+                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+              >
+                Submit
+              </button>
+              <button
+                type="reset"
+                className="px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/20"
+              >
+                Reset
+              </button>
+            </div>
+          </Form>
+        </Formik>
+      </div>
 
-              <FormField label="Textarea" labelFor="textarea" hasTextareaHeight>
-                {({ className }) => (
-                  <Field
-                    name="textarea"
-                    id="textarea"
-                    as="textarea"
-                    placeholder="Your text here"
-                    className={className}
-                  />
-                )}
-              </FormField>
+      <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 mb-8">
+        <h2 className="text-xl font-semibold text-white mb-6">Form Controls</h2>
+        
+        <Formik
+          initialValues={{
+            checkboxes: ["lorem"],
+            switches: ["lorem"],
+            radio: "lorem",
+          }}
+          onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
+        >
+          <Form className="space-y-6">
+            <div>
+              <h3 className="text-lg font-medium text-white mb-4">Checkboxes</h3>
+              <div className="space-y-3">
+                <label className="flex items-center cursor-pointer">
+                  <Field type="checkbox" name="checkboxes" value="lorem" className="sr-only peer" />
+                  <div className="relative w-5 h-5 bg-white/5 border border-white/20 rounded peer-checked:bg-blue-600 peer-checked:border-blue-600 transition-all">
+                    <svg className="w-3 h-3 text-white absolute top-0.5 left-0.5 hidden peer-checked:block" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <span className="ml-3 text-gray-300">Lorem</span>
+                </label>
+                <label className="flex items-center cursor-pointer">
+                  <Field type="checkbox" name="checkboxes" value="ipsum" className="sr-only peer" />
+                  <div className="relative w-5 h-5 bg-white/5 border border-white/20 rounded peer-checked:bg-blue-600 peer-checked:border-blue-600 transition-all">
+                    <svg className="w-3 h-3 text-white absolute top-0.5 left-0.5 hidden peer-checked:block" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <span className="ml-3 text-gray-300">Ipsum</span>
+                </label>
+              </div>
+            </div>
 
-              <Divider />
+            <div>
+              <h3 className="text-lg font-medium text-white mb-4">Radio Buttons</h3>
+              <div className="space-y-3">
+                <label className="flex items-center cursor-pointer">
+                  <Field type="radio" name="radio" value="lorem" className="sr-only peer" />
+                  <div className="w-5 h-5 bg-white/5 border border-white/20 rounded-full peer-checked:bg-blue-600 peer-checked:border-blue-600 transition-all relative">
+                    <div className="w-2 h-2 bg-white rounded-full absolute top-1.5 left-1.5 hidden peer-checked:block"></div>
+                  </div>
+                  <span className="ml-3 text-gray-300">Lorem</span>
+                </label>
+                <label className="flex items-center cursor-pointer">
+                  <Field type="radio" name="radio" value="ipsum" className="sr-only peer" />
+                  <div className="w-5 h-5 bg-white/5 border border-white/20 rounded-full peer-checked:bg-blue-600 peer-checked:border-blue-600 transition-all relative">
+                    <div className="w-2 h-2 bg-white rounded-full absolute top-1.5 left-1.5 hidden peer-checked:block"></div>
+                  </div>
+                  <span className="ml-3 text-gray-300">Ipsum</span>
+                </label>
+              </div>
+            </div>
 
-              <Buttons>
-                <Button type="submit" color="info" label="Submit" isGrouped />
-                <Button
-                  type="reset"
-                  color="info"
-                  outline
-                  label="Reset"
-                  isGrouped
-                />
-              </Buttons>
-            </Form>
-          </Formik>
-        </CardBox>
-      </SectionMain>
+            <div className="flex gap-4">
+              <button
+                type="submit"
+                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+              >
+                Submit
+              </button>
+              <button
+                type="reset"
+                className="px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/20"
+              >
+                Reset
+              </button>
+            </div>
+          </Form>
+        </Formik>
+      </div>
 
-      <SectionTitle>Custom elements</SectionTitle>
-
-      <SectionMain>
-        <CardBox>
-          <Formik
-            initialValues={{
-              checkboxes: ["lorem"],
-              switches: ["lorem"],
-              radio: "lorem",
-            }}
-            onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
-          >
-            <Form>
-              <FieldLabel>Checkbox</FieldLabel>
-              <FormCheckRadioGroup>
-                <FormCheckRadio type="checkbox" label="Lorem" isGrouped>
-                  <Field type="checkbox" name="checkboxes" value="lorem" />
-                </FormCheckRadio>
-                <FormCheckRadio type="checkbox" label="Ipsum" isGrouped>
-                  <Field type="checkbox" name="checkboxes" value="ipsum" />
-                </FormCheckRadio>
-                <FormCheckRadio type="checkbox" label="Dolore" isGrouped>
-                  <Field type="checkbox" name="checkboxes" value="dolore" />
-                </FormCheckRadio>
-              </FormCheckRadioGroup>
-
-              <Divider />
-
-              <FieldLabel>Radio</FieldLabel>
-
-              <FormCheckRadioGroup>
-                <FormCheckRadio type="radio" label="Lorem" isGrouped>
-                  <Field type="radio" name="radio" value="lorem" />
-                </FormCheckRadio>
-                <FormCheckRadio type="radio" label="Ipsum" isGrouped>
-                  <Field type="radio" name="radio" value="ipsum" />
-                </FormCheckRadio>
-              </FormCheckRadioGroup>
-
-              <Divider />
-
-              <FieldLabel>Switch</FieldLabel>
-
-              <FormCheckRadioGroup>
-                <FormCheckRadio type="switch" label="Lorem" isGrouped>
-                  <Field type="checkbox" name="switches" value="lorem" />
-                </FormCheckRadio>
-                <FormCheckRadio type="switch" label="Ipsum" isGrouped>
-                  <Field type="checkbox" name="switches" value="ipsum" />
-                </FormCheckRadio>
-              </FormCheckRadioGroup>
-
-              <Divider />
-
-              <Buttons>
-                <Button type="submit" color="info" label="Submit" isGrouped />
-                <Button
-                  type="reset"
-                  color="info"
-                  outline
-                  label="Reset"
-                  isGrouped
-                />
-              </Buttons>
-            </Form>
-          </Formik>
-        </CardBox>
-      </SectionMain>
-
-      <SectionMain>
-        <CardBox>
-          <FormFilePicker label="Upload" color="info" icon={mdiUpload} />
-        </CardBox>
-      </SectionMain>
-    </>
+      <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
+        <h2 className="text-xl font-semibold text-white mb-6">File Upload</h2>
+        <div className="border-2 border-dashed border-white/20 rounded-xl p-8 text-center hover:border-white/30 transition-colors">
+          <svg className="mx-auto h-12 w-12 text-gray-400 mb-4" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          <p className="text-gray-300 mb-2">Drag and drop files here, or click to browse</p>
+          <p className="text-sm text-gray-500">Supports: JPG, PNG, PDF up to 10MB</p>
+          <button className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors">
+            Choose Files
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

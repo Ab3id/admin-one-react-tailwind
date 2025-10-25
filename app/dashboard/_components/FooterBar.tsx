@@ -1,9 +1,9 @@
 import React, { ReactNode } from "react";
 import { containerMaxW } from "../../_lib/config";
-import JustboilLogo from "../../_components/JustboilLogo";
+// import JustboilLogo from "../../_components/JustboilLogo";
 
 type Props = {
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 export default function FooterBar({ children }: Props) {
@@ -15,19 +15,19 @@ export default function FooterBar({ children }: Props) {
         <div className="text-center md:text-left mb-6 md:mb-0">
           <b>
             &copy;{year},{` `}
-            <a href="https://justboil.me/" rel="noreferrer" target="_blank">
-              JustBoil.me
+            <a href="https://mojasms.co.tz" rel="noreferrer" target="_blank">
+              MojaSMS
             </a>
             .
           </b>
           {` `}
           {children}
         </div>
-        <div className="md:py-2">
+        {/* <div className="md:py-2">
           <a href="https://justboil.me" rel="noreferrer" target="_blank">
             <JustboilLogo className="w-auto h-8 md:h-6 mx-auto" />
           </a>
-        </div>
+        </div> */}
       </div>
     </footer>
   );

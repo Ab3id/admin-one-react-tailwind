@@ -11,7 +11,7 @@ export default function UserAvatarCurrentUser({
   className = "",
   children,
 }: Props) {
-  const userEmail = useAppSelector((state) => state.main.userEmail);
+  const userEmail = useAppSelector((state) => state.auth.user?.email);
 
   return (
     <UserAvatar username={userEmail ?? ""} className={className}>

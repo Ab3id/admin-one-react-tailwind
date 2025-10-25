@@ -8,6 +8,8 @@ import { getButtonColor } from "../../../_lib/colors";
 import AsideMenuList from "./List";
 import { MenuAsideItem } from "../../../_interfaces";
 import { usePathname } from "next/navigation";
+import { useAppDispatch } from "../../../_stores/hooks";
+import { logout } from "../../../_stores/authSlice";
 
 type Props = {
   item: MenuAsideItem;
@@ -18,6 +20,7 @@ type Props = {
 const AsideMenuItem = ({ item, isDropdownList = false, ...props }: Props) => {
   const [isLinkActive, setIsLinkActive] = useState(false);
   const [isDropdownActive, setIsDropdownActive] = useState(false);
+  const dispatch = useAppDispatch();
 
   const activeClassAddon =
     !item.color && isLinkActive ? "aside-menu-item-active font-bold" : "";
@@ -27,6 +30,11 @@ const AsideMenuItem = ({ item, isDropdownList = false, ...props }: Props) => {
   useEffect(() => {
     setIsLinkActive(item.href === pathname);
   }, [item.href, pathname]);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    props.onRouteChange();
+  };
 
   const asideMenuItemInnerContents = (
     <>
@@ -56,11 +64,11 @@ const AsideMenuItem = ({ item, isDropdownList = false, ...props }: Props) => {
   );
 
   const componentClass = [
-    "flex cursor-pointer",
-    isDropdownList ? "py-3 px-6 text-sm" : "py-3",
+    "flex cursor-pointer rounded-xl transition-all duration-200",
+    isDropdownList ? "py-2 px-4 text-sm" : "py-3 px-4 mx-1 mb-1",
     item.color
       ? getButtonColor(item.color, false, true)
-      : `aside-menu-item dark:text-slate-300 dark:hover:text-white`,
+      : `text-gray-300 hover:text-white hover:bg-white/10 ${isLinkActive ? 'bg-white/10 text-white' : ''}`,
   ].join(" ");
 
   return (
@@ -78,7 +86,14 @@ const AsideMenuItem = ({ item, isDropdownList = false, ...props }: Props) => {
       {!item.href && (
         <div
           className={componentClass}
-          onClick={() => setIsDropdownActive(!isDropdownActive)}
+          onClick={() => {
+            if (item.isLogout) {
+              console.log('Logging out...');
+              handleLogout();
+            } else {
+              setIsDropdownActive(!isDropdownActive);
+            }
+          }}
         >
           {asideMenuItemInnerContents}
         </div>

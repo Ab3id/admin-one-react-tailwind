@@ -10,8 +10,9 @@ import NavBar from "./_components/NavBar";
 import NavBarItemPlain from "./_components/NavBar/Item/Plain";
 import AsideMenu from "./_components/AsideMenu";
 import FooterBar from "./_components/FooterBar";
-import FormField from "../_components/FormField";
-import { Field, Form, Formik } from "formik";
+import OrganizationGuard from "../_components/OrganizationGuard";
+// import FormField from "../_components/FormField";
+// import { Field, Form, Formik } from "formik";
 
 type Props = {
   children: ReactNode;
@@ -26,75 +27,73 @@ export default function LayoutAuthenticated({ children }: Props) {
     setIsAsideLgActive(false);
   };
 
-  const layoutAsidePadding = "xl:pl-60";
+  const layoutAsidePadding = "xl:pl-72";
 
   return (
-    <div className={`overflow-hidden lg:overflow-visible`}>
-      <div
-        className={`${layoutAsidePadding} ${
-          isAsideMobileExpanded ? "ml-60 lg:ml-0" : ""
-        } pt-14 min-h-screen w-screen transition-position lg:w-auto bg-gray-50 dark:bg-slate-800 dark:text-slate-100`}
-      >
-        <NavBar
-          menu={menuNavBar}
-          className={`${layoutAsidePadding} ${isAsideMobileExpanded ? "ml-60 lg:ml-0" : ""}`}
+    <OrganizationGuard>
+      <div className="min-h-screen bg-black text-white">
+        {/* Grid Background */}
+        <div className="fixed inset-0 bg-[linear-gradient(rgba(255,255,255,.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.01)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_100%_100%_at_50%_0%,black,transparent)]"></div>
+        
+        <div
+          className={`${layoutAsidePadding} ${
+            isAsideMobileExpanded ? "ml-72 lg:ml-0" : ""
+          } pt-16 min-h-screen w-screen transition-position lg:w-auto relative z-10`}
         >
-          <NavBarItemPlain
-            display="flex lg:hidden"
-            onClick={() => setIsAsideMobileExpanded(!isAsideMobileExpanded)}
+          <NavBar
+            menu={menuNavBar}
+            className={`${layoutAsidePadding} ${isAsideMobileExpanded ? "ml-72 lg:ml-0" : ""}`}
           >
-            <Icon
-              path={isAsideMobileExpanded ? mdiBackburger : mdiForwardburger}
-              size="24"
-            />
-          </NavBarItemPlain>
-          <NavBarItemPlain
-            display="hidden lg:flex xl:hidden"
-            onClick={() => setIsAsideLgActive(true)}
-          >
-            <Icon path={mdiMenu} size="24" />
-          </NavBarItemPlain>
-          <NavBarItemPlain useMargin>
-            <Formik
-              initialValues={{
-                search: "",
-              }}
-              onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
+            <NavBarItemPlain
+              display="flex lg:hidden"
+              onClick={() => setIsAsideMobileExpanded(!isAsideMobileExpanded)}
             >
-              <Form>
-                <FormField isBorderless isTransparent>
-                  {({ className }) => (
-                    <Field
-                      name="search"
-                      placeholder="Search"
-                      className={className}
-                    />
-                  )}
-                </FormField>
-              </Form>
-            </Formik>
-          </NavBarItemPlain>
-        </NavBar>
-        <AsideMenu
-          isAsideMobileExpanded={isAsideMobileExpanded}
-          isAsideLgActive={isAsideLgActive}
-          menu={menuAside}
-          onAsideLgClose={() => setIsAsideLgActive(false)}
-          onRouteChange={handleRouteChange}
-        />
-        {children}
-        <FooterBar>
-          Get more with{` `}
-          <a
-            href="https://tailwind-react.justboil.me/dashboard"
-            target="_blank"
-            rel="noreferrer"
-            className="text-blue-600"
-          >
-            Premium version
-          </a>
-        </FooterBar>
+              <Icon
+                path={isAsideMobileExpanded ? mdiBackburger : mdiForwardburger}
+                size="24"
+              />
+            </NavBarItemPlain>
+            <NavBarItemPlain
+              display="hidden lg:flex xl:hidden"
+              onClick={() => setIsAsideLgActive(true)}
+            >
+              <Icon path={mdiMenu} size="24" />
+            </NavBarItemPlain>
+            {/* <NavBarItemPlain useMargin>
+              <Formik
+                initialValues={{
+                  search: "",
+                }}
+                onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
+              >
+                <Form>
+                  <FormField isBorderless isTransparent>
+                    {({ className }) => (
+                      <Field
+                        name="search"
+                        placeholder="Search"
+                        className={className}
+                      />
+                    )}
+                  </FormField>
+                </Form>
+              </Formik>
+            </NavBarItemPlain> */}
+          </NavBar>
+          <AsideMenu
+            isAsideMobileExpanded={isAsideMobileExpanded}
+            isAsideLgActive={isAsideLgActive}
+            menu={menuAside}
+            onAsideLgClose={() => setIsAsideLgActive(false)}
+            onRouteChange={handleRouteChange}
+          />
+          {children}
+          <FooterBar/>
+           {/* Mojaone Holding Ltd */}
+           
+          {/* </FooterBar> */}
+        </div>
       </div>
-    </div>
+    </OrganizationGuard>
   );
 }
